@@ -43,10 +43,12 @@ class MainActivity : AppCompatActivity() {
         broadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 if (intent?.action == ACTION_NOTIFICATION_IN){
-                    val title = intent.extras?.getString("title")
-                    val content = intent.extras?.getString("content")
+                    val title = intent.extras?.get("title") as CharSequence
+                    val subText = intent.extras?.get("subText") as CharSequence
+                    val content = intent.extras?.get("content") as CharSequence
                     val icon = intent.extras?.getParcelable<Bitmap>("icon")
                     titleText.text = title
+                    subTitleText.text = subText
                     contentText.text = content
                     icon?.let {
                         iconView.setImageBitmap(it)
